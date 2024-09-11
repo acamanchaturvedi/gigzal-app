@@ -1,0 +1,20 @@
+CREATE TABLE Category (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Location (
+    locationId SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    lats VARCHAR(50),
+    langs VARCHAR(50),
+    userId INT NOT NULL
+);
+
+CREATE TABLE Status (
+    id SERIAL PRIMARY KEY,
+    message VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
+
