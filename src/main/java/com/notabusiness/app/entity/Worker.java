@@ -16,6 +16,7 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int workerId;
 
+    //todo: add @Column(name = "name of column in table") annotation to every field in every entity class
     private int userId;
     private LocalDateTime timestamp;
     private String bio;
