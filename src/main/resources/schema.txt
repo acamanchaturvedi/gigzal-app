@@ -50,6 +50,16 @@ CREATE TABLE Worker (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
+CREATE TABLE faq (
+    id SERIAL PRIMARY KEY,
+    question VARCHAR(255) NOT NULL,
+    category_id BIGINT NOT NULL,
+    skill_id BIGINT,
+    answer TEXT NOT NULL,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (category_id),
+    CONSTRAINT fk_skill FOREIGN KEY (skill_id) REFERENCES skill (skill_id)
+);
+
 -- Create join tables for the many-to-many relationships
 CREATE TABLE WorkerSkill (
     worker_id VARCHAR(50),
