@@ -12,7 +12,6 @@ public class Faq {
     @Column(name = "faq_id")
     private Long faqId;
 
-    @Column(name = "question")
     private String question;
 
     @Column(name = "category_id")
@@ -21,7 +20,6 @@ public class Faq {
     @Column(name = "skill_id")
     private Long skillId;
 
-    @Column(name = "answer")
     private String answer;
 
 }
