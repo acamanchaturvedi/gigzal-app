@@ -17,6 +17,7 @@ public class Worker extends Auditable {
 
     @Column(name = "user_id")
     private int userId;
+    //todo: add mapping one to one or one to many or many to one
 
     private LocalDateTime timestamp;
 
