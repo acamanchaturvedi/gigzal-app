@@ -44,8 +44,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -56,58 +54,29 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.3</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.client -->
-        <dependency>
-            <groupId>org.apache.oltu.oauth2</groupId>
-            <artifactId>org.apache.oltu.oauth2.client</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>3.12.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.gsonfire/gson-fire -->
-        <dependency>
-            <groupId>io.gsonfire</groupId>
-            <artifactId>gson-fire</artifactId>
-            <version>1.7.1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+<!--        swagger dependencies-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.8.0</version>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.20</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -128,15 +97,15 @@
                 <version>7.1.0</version>
                 <executions>
                     <execution>
+                        <id>generate-code</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
                             <inputSpec>${project.basedir}/src/main/resources/design/GigzalSwagger.yaml</inputSpec>
-                            <generatorName>java</generatorName>
-                            <generateApis>true</generateApis>
-                            <generateModels>true</generateModels>
-                            <output>${project.basedir}/generated-sources</output>
+                            <output>${project.basedir}/target/generated-sources</output>
                             <modelPackage>
                                 com.notabusiness.app.gigzal.generated.model
                             </modelPackage>
@@ -144,16 +113,14 @@
                                 com.notabusiness.app.gigzal.generated.controller
                             </apiPackage>
                             <configOptions>
-                                <sourceFolder>src/gen/java/main</sourceFolder>
-                                <useSpringBoot3>true</useSpringBoot3>
+                                <useTags>true</useTags>
                                 <useResponseEntity>true</useResponseEntity>
-                                <useJakartaEe>true</useJakartaEe>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <sourceFolder>src/main/java</sourceFolder>
                                 <dateLibrary>java8</dateLibrary>
                                 <interfaceOnly>true</interfaceOnly>
-                                <useOptional>false</useOptional>
-                                <generateApis>true</generateApis>
-                                <generateModels>true</generateModels>
-                                <generateSupportingFiles>false</generateSupportingFiles>
+                                <serializableModel>true</serializableModel>
+                                <documentationProvider>springdoc</documentationProvider>
                             </configOptions>
                         </configuration>
                     </execution>
