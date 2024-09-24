@@ -9,4 +9,8 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
+  security:
+    user:
+      name: aman
+      password: pass
 
