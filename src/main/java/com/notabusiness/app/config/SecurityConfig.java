@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -37,8 +38,8 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(); // authentication provider for db
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); // no password encoder
-        provider.setUserDetailsService(userDetailsService); //
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(11)); // strength should be same as in service while registering new user and encoding it's password
+        provider.setUserDetailsService(userDetailsService);
         return provider;
     }
 
