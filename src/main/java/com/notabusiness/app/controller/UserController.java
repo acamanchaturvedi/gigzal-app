@@ -18,4 +18,9 @@ public class UserController {
         return tempUserService.register(tempUser);
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody TempUser tempUser) {
+        return tempUserService.verify(tempUser);
+    }
+
 }
