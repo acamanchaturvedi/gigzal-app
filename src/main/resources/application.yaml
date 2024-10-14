@@ -13,4 +13,6 @@ spring:
     user:
       name: aman
       password: pass
+  banner:
+    location: classpath:banner.txt
 
