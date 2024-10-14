@@ -31,7 +31,7 @@ public class TempUserService {
     public String verify(TempUser tempUser) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(tempUser.getUsername(), tempUser.getPassword()));
         if(authentication.isAuthenticated())
-            return jwtService.generateToken();
+            return jwtService.generateToken(tempUser.getUsername());
         return "Failure";
     }
 }
