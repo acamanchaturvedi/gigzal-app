@@ -1,6 +1,5 @@
 package com.notabusiness.app.controller;
 
-import com.notabusiness.app.entity.Category;
 import com.notabusiness.app.repo.CategoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

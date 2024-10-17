@@ -3,7 +3,6 @@ package com.notabusiness.app.entity;
 import com.notabusiness.app.util.Auditable;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.List;
 import com.notabusiness.app.util.UserRole;
 
 @Data
