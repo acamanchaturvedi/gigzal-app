@@ -15,11 +15,15 @@ public class Location extends Auditable {
 
     private String name;
 
+    @Column(name = "city")
+    private String city;
+
     private String lats;
 
     private String langs;
 
-    @Column(name = "user_id")
-    private int userId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
+    private Users usersId;
 
 }

@@ -1,7 +1,7 @@
 package com.notabusiness.app.controller;
 
-import com.notabusiness.app.entity.TempUser;
-import com.notabusiness.app.service.TempUserService;
+import com.notabusiness.app.entity.Users;
+import com.notabusiness.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private TempUserService tempUserService;
+    private UserService userService;
 
     @PostMapping("/register")
-    public TempUser register(@RequestBody TempUser tempUser) {
-        return tempUserService.register(tempUser);
+    public Users register(@RequestBody Users user) {
+        return userService.register(user);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody TempUser tempUser) {
-        return tempUserService.verify(tempUser);
+    public String login(@RequestBody Users user) {
+        return userService.verify(user);
     }
 
 }

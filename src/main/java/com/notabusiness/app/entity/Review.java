@@ -18,14 +18,6 @@ public class Review extends Auditable {
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
-
-    @ManyToOne
-    @JoinColumn(name = "worker_id", nullable = false)
-    private Worker worker;
-
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 

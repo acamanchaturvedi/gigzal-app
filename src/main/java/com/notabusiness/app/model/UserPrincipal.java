@@ -1,6 +1,6 @@
 package com.notabusiness.app.model;
 
-import com.notabusiness.app.entity.TempUser;
+import com.notabusiness.app.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,10 +10,10 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private TempUser tempUser;
+    private Users user;
 
-    public UserPrincipal(TempUser tempUser) {
-        this.tempUser = tempUser;
+    public UserPrincipal(Users user) {
+        this.user = user;
     }
 
     @Override
@@ -23,12 +23,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return tempUser.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return tempUser.getUsername();
+        return user.getUsername();
     }
 
     @Override

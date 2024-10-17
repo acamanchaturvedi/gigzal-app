@@ -10,30 +10,23 @@ import com.notabusiness.app.util.UserRole;
 public class Users extends Auditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "users_id")
-    private int userId;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "username", unique = true)
-    private String username;
-
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "phone")
+    @Column(name = "phone", unique = true)
     private String phone;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "city")
-    private String city;
-
     @Column(name = "photo_id")
-    private Long photoId;
+    private String photoId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
