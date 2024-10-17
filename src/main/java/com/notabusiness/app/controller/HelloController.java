@@ -14,9 +14,6 @@ public class HelloController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-//        Category testOneCategory = new Category();
-//        testOneCategory.setName("test one");
-//        categoryRepository.saveAndFlush(testOneCategory);
         return "Hello Aman! " + request.getSession().getId();
     }
 
