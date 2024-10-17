@@ -23,7 +23,7 @@ public class Location extends Auditable {
     private String langs;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "username")
     private Users usersId;
 
 }

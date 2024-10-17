@@ -16,7 +16,7 @@ public class Worker extends Auditable {
     private int workerId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "username")
     private Users usersId;
 
     private LocalDateTime timestamp;

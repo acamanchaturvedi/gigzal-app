@@ -1,7 +1,7 @@
 package com.notabusiness.app.service;
 
-import com.notabusiness.app.entity.TempUser;
-import com.notabusiness.app.repo.TempUsersRepository;
+import com.notabusiness.app.entity.Users;
+import com.notabusiness.app.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,10 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TempUserService {
+public class UserService {
 
     @Autowired
-    private TempUsersRepository tempUsersRepository;
+    private UsersRepository userRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -23,15 +23,15 @@ public class TempUserService {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(11);
 
-    public TempUser register(TempUser tempUser) {
-        tempUser.setPassword(bCryptPasswordEncoder.encode(tempUser.getPassword()));
-        return tempUsersRepository.save(tempUser);
+    public Users register(Users user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
-    public String verify(TempUser tempUser) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(tempUser.getUsername(), tempUser.getPassword()));
+    public String verify(Users user) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if(authentication.isAuthenticated())
-            return jwtService.generateToken(tempUser.getUsername());
+            return jwtService.generateToken(user.getUsername());
         return "Failure";
     }
 }

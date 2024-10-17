@@ -46,7 +46,7 @@ public class Appointment extends Auditable {
     private Skill skill;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "username")
     private Users users;
 
     @Enumerated(EnumType.STRING)
