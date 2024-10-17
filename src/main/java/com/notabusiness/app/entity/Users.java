@@ -29,9 +29,6 @@ public class Users extends Auditable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "city")
-    private String city;
-
     @Column(name = "photo_id")
     private Long photoId;
 

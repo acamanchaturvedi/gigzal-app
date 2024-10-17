@@ -37,10 +37,6 @@ public class Appointment extends Auditable {
     @Column(name = "photo_id")
     private String photoId;
 
-    @OneToOne(cascade =  CascadeType.ALL)
-    @JoinColumn(name = "loc_id")
-    private Location location;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "worker_id")
     private Worker worker;
