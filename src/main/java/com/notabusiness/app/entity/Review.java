@@ -35,10 +35,6 @@ public class Review extends Auditable {
     @Column(name = "city")
     private String city;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
     @CollectionTable(name = "review_photos", joinColumns = @JoinColumn(name = "review_id"))
     @Column(name = "photo_id")
     private List<String> photos;

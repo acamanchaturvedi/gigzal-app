@@ -4,8 +4,6 @@ import com.notabusiness.app.util.Auditable;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Entity
 public class Category extends Auditable {
@@ -24,19 +22,10 @@ public class Category extends Auditable {
     @Column(name = "long_description")
     private String longDescription;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Appointment> appointments;
-
     @Column(name = "photo_id")
     private String photoId;
 
     @Column(name = "logo_photo_id")
     private String logoPhotoId;
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Faq> faqs;
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Worker> workers;
 
 }

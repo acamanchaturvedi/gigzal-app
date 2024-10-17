@@ -19,17 +19,6 @@ public class Tag extends Auditable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "tag_type")
-    private String tagType;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_tag",
-            joinColumns = @JoinColumn(name = "tag_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<Users> users;
-
     @ManyToMany
     @JoinTable(
             name = "worker_tag",

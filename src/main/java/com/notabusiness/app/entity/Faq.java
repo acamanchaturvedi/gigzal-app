@@ -15,11 +15,13 @@ public class Faq extends Auditable {
 
     private String question;
 
-    @Column(name = "category_id")
-    private Long categoryId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
+    private Category categoryId;
 
-    @Column(name = "skill_id")
-    private Long skillId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "skill_id")
+    private Skill skillId;
 
     private String answer;
 

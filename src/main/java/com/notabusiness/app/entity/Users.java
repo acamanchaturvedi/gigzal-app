@@ -12,7 +12,7 @@ public class Users extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "users_id")
     private int userId;
 
     @Column(name = "name")
@@ -32,17 +32,6 @@ public class Users extends Auditable {
 
     @Column(name = "city")
     private String city;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Review> submittedReviews;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_appointment_history",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "appointment_id")
-    )
-    private List<Appointment> appointmentHistory;
 
     @Column(name = "photo_id")
     private Long photoId;

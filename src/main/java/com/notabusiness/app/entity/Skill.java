@@ -25,9 +25,6 @@ public class Skill extends Auditable {
     @Column(name = "sub_title")
     private String subTitle;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Faq> faqs;
-
     @Column(name = "long_description")
     private String longDescription;
 
@@ -36,4 +33,12 @@ public class Skill extends Auditable {
 
     @Column(name = "logo_photo_id")
     private String logoPhotoId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "worker_skill",
+            joinColumns = @JoinColumn(name = "skill_id"),
+            inverseJoinColumns = @JoinColumn(name = "worker_id")
+    )
+    private List<Worker> workers;
 }
