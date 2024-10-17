@@ -19,10 +19,6 @@ public class Review extends Auditable {
     private int rating;
 
     @ManyToOne
-    @JoinColumn(name = "appointment_id", nullable = false)
-    private Appointment appointment;
-
-    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
