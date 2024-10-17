@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gigzal
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5433/app"
+    username: postgres
+    password: password
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  security:
+    user:
+      name: aman
+      password: pass
+  banner:
+    location: classpath:banner.txt
+
