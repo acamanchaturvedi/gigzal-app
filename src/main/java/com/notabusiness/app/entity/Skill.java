@@ -13,7 +13,7 @@ public class Skill extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "skill_id")
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

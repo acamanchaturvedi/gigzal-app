@@ -25,7 +25,7 @@ paths:
         - service
       summary: Fetch all categories
       description: Fetch all categories
-      operationId: findAllCaregories
+      operationId: findAllCategories
       parameters:
         - name: category
           in: query
@@ -48,13 +48,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CategorySerachResponse'
+                  $ref: '#/components/schemas/CategorySearchResponse'
         '400':
           description: Invalid status value
 
 components:
   schemas:
-    CategorySerachResponse:
+    CategorySearchResponse:
       type: object
       properties:
         categoryId:
