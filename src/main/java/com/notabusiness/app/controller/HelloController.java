@@ -14,7 +14,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-        return "Hello Aman! " + request.getSession().getId();
+        return "Hello Gigzal! " + request.getSession().getId();
     }
 
 }

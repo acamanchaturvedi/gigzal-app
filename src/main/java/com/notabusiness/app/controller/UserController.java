@@ -2,16 +2,16 @@ package com.notabusiness.app.controller;
 
 import com.notabusiness.app.entity.Users;
 import com.notabusiness.app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public Users register(@RequestBody Users user) {

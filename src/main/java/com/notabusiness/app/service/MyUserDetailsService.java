@@ -3,17 +3,17 @@ package com.notabusiness.app.service;
 import com.notabusiness.app.entity.Users;
 import com.notabusiness.app.model.UserPrincipal;
 import com.notabusiness.app.repo.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UsersRepository userRepository;
+    private final UsersRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
