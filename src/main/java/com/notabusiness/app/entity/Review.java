@@ -18,18 +18,6 @@ public class Review extends Auditable {
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne
-    @JoinColumn(name = "appointment_id", nullable = false)
-    private Appointment appointment;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
-
-    @ManyToOne
-    @JoinColumn(name = "worker_id", nullable = false)
-    private Worker worker;
-
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
@@ -38,10 +26,6 @@ public class Review extends Auditable {
 
     @Column(name = "city")
     private String city;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
 
     @CollectionTable(name = "review_photos", joinColumns = @JoinColumn(name = "review_id"))
     @Column(name = "photo_id")

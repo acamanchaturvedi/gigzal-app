@@ -1,8 +1,11 @@
 
+
 package com.notabusiness.app.controller;
 import com.notabusiness.app.entity.Category;
 
 import com.notabusiness.app.repository.CategoryRepository;
+
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +19,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-//        Category testOneCategory = new Category();
-//        testOneCategory.setName("test one");
-//        categoryRepository.saveAndFlush(testOneCategory);
-        return "Hello Aman! " + request.getSession().getId();
+        return "Hello Gigzal! " + request.getSession().getId();
     }
 
 }
