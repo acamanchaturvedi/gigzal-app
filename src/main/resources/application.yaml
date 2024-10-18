@@ -9,9 +9,19 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
+
     hibernate:
       ddl-auto: update
   security:
     user:
       name: aman
       password: pass
+
+  security:
+    user:
+      name: aman
+      password: pass
+  banner:
+    location: classpath:banner.txt
+
+
