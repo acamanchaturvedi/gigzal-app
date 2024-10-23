@@ -22,7 +22,7 @@ public class Location extends Auditable {
 
     private String langs;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username")
     private Users usersId;
 
