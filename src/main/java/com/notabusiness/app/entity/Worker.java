@@ -15,7 +15,7 @@ public class Worker extends Auditable {
     @Column(name = "worker_id")
     private int workerId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username")
     private Users usersId;
 
