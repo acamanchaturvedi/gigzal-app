@@ -27,12 +27,15 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable) // disable CSRF since we are making it stateless
                 .authorizeHttpRequests(request -> request.requestMatchers("register", "login").permitAll() // these links will be open
                         .anyRequest().authenticated()) // enable authorization for all other requests
 //                .formLogin(Customizer.withDefaults()) // enable form login ui
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(customAuthenticationEntryPoint)) //add custom exception handling for security
                 .httpBasic(Customizer.withDefaults()) // enable authorization on postman
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // make it stateless, so it will require authentication for every request, generate new session everytime for each request
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
