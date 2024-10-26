@@ -1,6 +1,11 @@
-package com.notabusiness.app.controller;
 
-import com.notabusiness.app.repo.CategoryRepository;
+
+package com.notabusiness.app.controller;
+import com.notabusiness.app.entity.Category;
+
+import com.notabusiness.app.repository.CategoryRepository;
+
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,4 +23,5 @@ public class HelloController {
     }
 
 }
+
 

@@ -3,14 +3,17 @@ spring:
     name: gigzal
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5433/app"
+    url: "jdbc:postgresql://localhost:5432/app"
     username: postgres
-    password: password
+    password: postgres
   jpa:
     database: POSTGRESQL
     show-sql: true
+
+
     hibernate:
       ddl-auto: create
+
   security:
     user:
       name: aman
@@ -19,4 +22,5 @@ spring:
     location: classpath:banner.txt
 jwt-token:
   expire-time: 86400000 #  one day
+
 
