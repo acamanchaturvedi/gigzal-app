@@ -17,16 +17,21 @@ public class UserController implements AuthenticationApi {
 
     private final UserService userService;
 
+    private static final String RESPONSE_BAD_REQUEST = "username or password can not be empty";
+
     @PostMapping("/register")
     public Users register(@RequestBody Users user) {
-        if (user.getUsername() == null) {
-            throw new ApplicationException("error code", "username is null", HttpStatus.BAD_REQUEST);
+        if (user.getUsername() == null || user.getUsername().isBlank() || user.getPassword() == null || user.getPassword().isBlank()) {
+            throw new ApplicationException(RESPONSE_BAD_REQUEST);
         }
         return userService.register(user);
     }
 
     @Override
     public LoginResponse login(String username, String password) {
+        if (username == null || username.isBlank() || password == null || password.isBlank()) {
+            throw new ApplicationException(RESPONSE_BAD_REQUEST);
+        }
         return userService.verify(username, password);
     }
 
