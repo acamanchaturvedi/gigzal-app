@@ -18,6 +18,6 @@ spring:
   banner:
     location: classpath:banner.txt
 jwt-token:
-  expire-time: 86400000 #  one day
+  expire-time: 86400000 #  one day (time in milliseconds)
 
 

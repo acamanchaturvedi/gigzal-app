@@ -7,10 +7,8 @@ import com.notabusiness.app.gigzal.generated.model.LoginResponse;
 import com.notabusiness.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,9 +26,8 @@ public class UserController implements AuthenticationApi {
     }
 
     @Override
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestParam String username, @RequestParam String password) {
-        return new ResponseEntity<>(userService.verify(username, password), HttpStatus.OK);
+    public LoginResponse login(String username, String password) {
+        return userService.verify(username, password);
     }
 
 }
