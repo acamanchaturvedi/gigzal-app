@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+tags:
+  - name: service
+    description: Everything about service
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /categories:
+    get:
+      tags:
+        - service
+      summary: Fetch all categories
+      description: Fetch all categories
+      operationId: findAllCategories
+      parameters:
+        - name: category
+          in: query
+          description: Filter category based on string provided
+          required: false
+          schema:
+            type: string
+        - name: range
+          in: header
+          description: Range
+          required: true
+          schema:
+            type: string
+            default: 0-10
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategorySearchResponse'
+        '400':
+          description: Invalid status value
+
+components:
+  schemas:
+    CategorySearchResponse:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          description: Category Id
+          example: 1
+        categoryTitle:
+          type: string
+          description: Category Title
+          example: Moving Services
+        subTitle:
+          type: string
+          description: Category Sub Title
+          example: From heavy lifting to unpacking make your move with Gigzal
+        SkillResponse:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+      required:
+        - categoryId
+        - categoryTitle
+        - subTitle
+        - SkillResponse
+    Skill:
+      type: object
+      properties:
+        SkillId:
+          type: integer
+          description: Skill Id
+          example: 1
+        SkillTitle:
+          type: string
+          description: Skill Title
+          example: Help Moving
+      required:
+        - SkillId
+        - SkillTitle
