@@ -1,5 +1,6 @@
 package com.notabusiness.app.service;
 
+import com.notabusiness.app.gigzal.generated.model.LoginResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -36,18 +37,19 @@ public class JwtService {
         }
     }
 
-    public String generateToken(String username) {
+    public LoginResponse generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder()
+        long currentTimeMillis = System.currentTimeMillis();
+        String accessToken = Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtTokenExpireTime))
+                .issuedAt(new Date(currentTimeMillis))
+                .expiration(new Date(currentTimeMillis + jwtTokenExpireTime))
                 .and()
                 .signWith(getKey())
                 .compact();
-
+        return new LoginResponse(accessToken, jwtTokenExpireTime);
     }
 
     private SecretKey getKey() {

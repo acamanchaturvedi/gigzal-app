@@ -1,7 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Swagger Petstore - OpenAPI 3.0
-
+  title: Swagger Gigzal - OpenAPI 3.0
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -9,16 +8,43 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.11
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
 tags:
+  - name: authentication
+    description: register new user, login user and get access token
   - name: service
     description: Everything about service
-    externalDocs:
-      description: Find out more
-      url: http://swagger.io
 paths:
+  /login:
+    post:
+      tags:
+        - authentication
+      summary: Fetch access token
+      description: Fetch access token
+      operationId: login
+      parameters:
+        - name: username
+          in: query
+          description: Provide the username of the user
+          required: true
+          schema:
+            type: string
+          example: aman
+        - name: password
+          in: query
+          description: Provide the password of the user
+          required: true
+          schema:
+            type: string
+            format: password
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid status value
   /categories:
     get:
       tags:
@@ -51,9 +77,22 @@ paths:
                   $ref: '#/components/schemas/CategorySearchResponse'
         '400':
           description: Invalid status value
-
 components:
   schemas:
+    LoginResponse:
+      properties:
+        accessToken:
+          type: string
+          description: Skill Id
+          example: >-
+            eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWFuMSIsImlhdCI6MTcyOTk1MDY2MSwiZXhwIjoxNzMwMDM3MDYxfQ.SpXggj2ZNjmBOqxuB56QAHIkcwU9YQcpE7z11wvuwwE
+        expiresInMilliseconds:
+          type: integer
+          description: Skill Title
+          example: 86400000
+      required:
+        - accessToken
+        - expiresInMilliseconds
     CategorySearchResponse:
       type: object
       properties:
