@@ -17,4 +17,6 @@ spring:
       password: pass
   banner:
     location: classpath:banner.txt
+jwt-token:
+  expire-time: 86400000 #  one day
 

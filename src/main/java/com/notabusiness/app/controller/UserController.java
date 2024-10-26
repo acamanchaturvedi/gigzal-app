@@ -18,7 +18,7 @@ public class UserController {
     @PostMapping("/register")
     public Users register(@RequestBody Users user) {
         if(user.getUsername()==null) {
-            throw new ApplicationException("error code","username is null", HttpStatus.BAD_GATEWAY);
+            throw new ApplicationException("error code","username is null", HttpStatus.BAD_REQUEST);
         }
         return userService.register(user);
     }
