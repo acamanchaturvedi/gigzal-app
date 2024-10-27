@@ -167,18 +167,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.1.0</version>
@@ -200,17 +188,18 @@
                                 com.notabusiness.app.gigzal.generated.controller
                             </apiPackage>
                             <configOptions>
+                                <!--use tag name to create class name for paths-->
                                 <useTags>true</useTags>
                                 <!--use class directly instead of wrapping up inside ResponseEntity-->
                                 <useResponseEntity>false</useResponseEntity>
                                 <!--interface methods won't be default hence will be mandatory to implement-->
                                 <skipDefaultInterface>true</skipDefaultInterface>
+                                <!--generate code with Spring Boot 3.x. (Use jakarta instead of javax)-->
                                 <useSpringBoot3>true</useSpringBoot3>
-                                <sourceFolder>src/main/java</sourceFolder>
-                                <dateLibrary>java8</dateLibrary>
+                                <!--generate interface only for paths, otherwise it will create main class file also resulting in build fail-->
                                 <interfaceOnly>true</interfaceOnly>
+                                <!--to generate serializable model classes, why? todo-->
                                 <serializableModel>true</serializableModel>
-                                <documentationProvider>springdoc</documentationProvider>
                             </configOptions>
                         </configuration>
                     </execution>
