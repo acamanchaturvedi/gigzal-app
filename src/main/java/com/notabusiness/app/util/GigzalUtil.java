@@ -1,9 +1,13 @@
-package com.notabusiness.app.helper;
+package com.notabusiness.app.util;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class GigzalUtils {
+public class GigzalUtil {
+
+    private GigzalUtil() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static List<Integer> getOffsetLimitFromRange(String range){
         String[] parts = range.split("-");

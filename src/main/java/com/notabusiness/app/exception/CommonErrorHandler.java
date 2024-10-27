@@ -19,37 +19,46 @@ public class CommonErrorHandler {
     @ExceptionHandler(InsufficientAuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiErrorResponse handleAccessDeniedException(HttpServletRequest httpServletRequest, InsufficientAuthenticationException exception) {
-        return new ApiErrorResponse(null, null, "Invalid token", exception.getMessage(), httpServletRequest.getAttribute(RequestDispatcher.ERROR_REQUEST_URI).toString(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, "Invalid token", exception.getMessage(), getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiErrorResponse handleAccessDeniedException(HttpServletRequest httpServletRequest, BadCredentialsException exception) {
-        return new ApiErrorResponse(null, null, "Invalid credentials", exception.getMessage(), httpServletRequest.getRequestURI(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, "Invalid credentials", exception.getMessage(), getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiErrorResponse handleAccessDeniedException(HttpServletRequest httpServletRequest, AuthenticationException exception) {
-        return new ApiErrorResponse(null, null, "Authentication fail", exception.getMessage(), httpServletRequest.getAttribute(RequestDispatcher.ERROR_REQUEST_URI).toString(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, "Authentication fail", exception.getMessage(), getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse handleUnknownException(HttpServletRequest httpServletRequest, MissingServletRequestParameterException exception) {
-        return new ApiErrorResponse(null, null, "Missing required field or values", exception.getMessage(), httpServletRequest.getRequestURI(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, "Missing required field or values", exception.getMessage(), getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(ApplicationException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrorResponse handleApplicationException(HttpServletRequest httpServletRequest, ApplicationException exception) {
-        return new ApiErrorResponse(null, null, exception.getMessage(), null, httpServletRequest.getRequestURI(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, exception.getMessage(), null, getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrorResponse handleUnknownException(HttpServletRequest httpServletRequest, Exception exception) {
-        return new ApiErrorResponse(null, null, "Internal server error", exception.getMessage(), httpServletRequest.getRequestURI(), LocalDateTime.now());
+        return new ApiErrorResponse(null, null, "Internal server error", exception.getMessage(), getUri(httpServletRequest), LocalDateTime.now());
+    }
+
+    private String getUri(HttpServletRequest request) {
+        String uri;
+        uri = request.getRequestURI();
+        if (uri.equals("/error")) {
+            uri = request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI).toString();
+        }
+        return uri;
     }
 
 }

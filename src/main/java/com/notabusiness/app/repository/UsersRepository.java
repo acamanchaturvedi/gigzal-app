@@ -1,4 +1,4 @@
-package com.notabusiness.app.repo;
+package com.notabusiness.app.repository;
 
 import com.notabusiness.app.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;

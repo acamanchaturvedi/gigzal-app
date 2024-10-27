@@ -2,7 +2,7 @@ package com.notabusiness.app.service;
 
 import com.notabusiness.app.entity.Users;
 import com.notabusiness.app.gigzal.generated.model.LoginResponse;
-import com.notabusiness.app.repo.UsersRepository;
+import com.notabusiness.app.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,9 +28,7 @@ public class UserService {
     }
 
     public LoginResponse verify(String username, String password) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//        if(authentication.isAuthenticated())
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         return jwtService.generateToken(username);
-//        return "Failure";
     }
 }

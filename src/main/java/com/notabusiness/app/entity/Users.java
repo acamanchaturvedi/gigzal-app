@@ -3,7 +3,7 @@ package com.notabusiness.app.entity;
 import com.notabusiness.app.util.Auditable;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.notabusiness.app.util.UserRole;
+import com.notabusiness.app.util.enums.UserRole;
 
 @Data
 @Entity

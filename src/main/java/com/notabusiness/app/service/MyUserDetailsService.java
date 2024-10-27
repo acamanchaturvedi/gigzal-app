@@ -2,7 +2,7 @@ package com.notabusiness.app.service;
 
 import com.notabusiness.app.entity.Users;
 import com.notabusiness.app.model.UserPrincipal;
-import com.notabusiness.app.repo.UsersRepository;
+import com.notabusiness.app.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
