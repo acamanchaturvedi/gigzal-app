@@ -6,7 +6,6 @@ import com.notabusiness.app.gigzal.generated.controller.AuthenticationApi;
 import com.notabusiness.app.gigzal.generated.model.LoginResponse;
 import com.notabusiness.app.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
