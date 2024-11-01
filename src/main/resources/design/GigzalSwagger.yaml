@@ -1,25 +1,48 @@
 openapi: 3.0.0
 info:
-  title: Swagger Gigzal - OpenAPI 3.0
+  title: Gigzal - OpenAPI 3.0
   termsOfService: http://swagger.io/terms/
   contact:
-    email: apiteam@swagger.io
+    email: acamanchaturvedi@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.11
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: local server, dev environment
 tags:
   - name: authentication
     description: register new user, login user and get access token
   - name: service
     description: Everything about service
 paths:
+  /register:
+    post:
+      tags:
+        - authentication
+      summary: register in app to create a new account
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterRequest'
+        '400':
+          description: Invalid status value
   /login:
     post:
       tags:
         - authentication
-      summary: Fetch access token
-      description: Fetch access token
+      summary: login to app, fetch access token on successful login
       operationId: login
       parameters:
         - name: username
@@ -79,16 +102,62 @@ paths:
           description: Invalid status value
 components:
   schemas:
+    Auditable:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          example:
+        createdDate:
+          type: string
+          example:
+        modifiedBy:
+          type: string
+          example:
+        modifiedDate:
+          type: string
+          example:
+    RegisterRequest:
+      allOf:
+        - $ref: "#/components/schemas/Auditable"
+        - type: object
+          required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              example: aman1
+            password:
+              type: string
+              example: pass@123
+            name:
+              type: string
+              example: Aman Chaturvedi
+            email:
+              type: string
+              example: acamanchaturvedi@gmail.com
+            phone:
+              type: string
+              example: '+918384960199'
+            photoId:
+              type: string
+              example: 1234
+            userRole:
+              type: string
+              example: USER
+            isDeleted:
+              type: boolean
+              example: false
     LoginResponse:
+      type: object
       properties:
         accessToken:
           type: string
-          description: Skill Id
           example: >-
             eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWFuMSIsImlhdCI6MTcyOTk1MDY2MSwiZXhwIjoxNzMwMDM3MDYxfQ.SpXggj2ZNjmBOqxuB56QAHIkcwU9YQcpE7z11wvuwwE
         expiresInMilliseconds:
           type: integer
-          description: Skill Title
           example: 86400000
       required:
         - accessToken
