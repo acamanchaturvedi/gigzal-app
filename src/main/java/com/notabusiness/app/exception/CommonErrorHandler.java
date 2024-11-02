@@ -41,9 +41,9 @@ public class CommonErrorHandler {
     }
 
     @ExceptionHandler(ApplicationException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse handleApplicationException(HttpServletRequest httpServletRequest, ApplicationException exception) {
-        return new ApiErrorResponse(null, null, exception.getMessage(), null, getUri(httpServletRequest), LocalDateTime.now());
+        return new ApiErrorResponse(exception.getTransactionId().toString(), null, exception.getMessage(), null, getUri(httpServletRequest), LocalDateTime.now());
     }
 
     @ExceptionHandler(Exception.class)

@@ -4,11 +4,13 @@ import com.notabusiness.app.entity.Users;
 import com.notabusiness.app.exception.ApplicationException;
 import com.notabusiness.app.gigzal.generated.controller.AuthenticationApi;
 import com.notabusiness.app.gigzal.generated.model.LoginResponse;
+import com.notabusiness.app.gigzal.generated.model.RegisterRequest;
 import com.notabusiness.app.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,20 +18,24 @@ public class UserController implements AuthenticationApi {
 
     private final UserService userService;
 
+    private final ModelMapper modelMapper;
+
     private static final String RESPONSE_BAD_REQUEST = "username or password can not be empty";
 
-    @PostMapping("/register")
-    public Users register(@RequestBody Users user) {
-        if (user.getUsername() == null || user.getUsername().isBlank() || user.getPassword() == null || user.getPassword().isBlank()) {
-            throw new ApplicationException(RESPONSE_BAD_REQUEST);
+    @Override
+    public RegisterRequest register(UUID transactionId, RegisterRequest registerRequest) {
+        Users user = modelMapper.map(registerRequest, Users.class);
+        if (user.getUsername() == null || user.getUsername().isBlank()
+                || user.getPassword() == null || user.getPassword().isBlank()) {
+            throw new ApplicationException(RESPONSE_BAD_REQUEST, transactionId);
         }
-        return userService.register(user);
+        return modelMapper.map(userService.register(user), RegisterRequest.class);
     }
 
     @Override
-    public LoginResponse login(String username, String password) {
+    public LoginResponse login(UUID transactionId, String username, String password) {
         if (username == null || username.isBlank() || password == null || password.isBlank()) {
-            throw new ApplicationException(RESPONSE_BAD_REQUEST);
+            throw new ApplicationException(RESPONSE_BAD_REQUEST, transactionId);
         }
         return userService.verify(username, password);
     }

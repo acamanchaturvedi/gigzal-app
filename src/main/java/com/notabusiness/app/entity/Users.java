@@ -30,7 +30,7 @@ public class Users extends Auditable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
-    private UserRole userRole;
+    private UserRole userRole = UserRole.USER;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
