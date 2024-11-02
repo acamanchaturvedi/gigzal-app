@@ -1,4 +1,4 @@
-package com.notabusiness.app.util;
+package com.notabusiness.app.util.enums;
 
 public enum AppointmentType {
     SMALL,

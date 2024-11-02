@@ -3,7 +3,7 @@ package com.notabusiness.app.entity;
 import com.notabusiness.app.util.Auditable;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.notabusiness.app.util.UserRole;
+import com.notabusiness.app.util.enums.UserRole;
 
 @Data
 @Entity
@@ -30,7 +30,7 @@ public class Users extends Auditable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
-    private UserRole userRole;
+    private UserRole userRole = UserRole.USER;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

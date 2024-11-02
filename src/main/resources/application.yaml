@@ -9,16 +9,15 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
-
-
     hibernate:
       ddl-auto: create
-
   security:
     user:
       name: aman
       password: pass
   banner:
     location: classpath:banner.txt
+jwt-token:
+  expire-time: 86400000 #  one day (time in milliseconds)
 
 

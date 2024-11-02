@@ -1,9 +1,11 @@
 package com.notabusiness.app.service;
 
+import com.notabusiness.app.gigzal.generated.model.LoginResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    @Value("${jwt-token.expire-time}")
+    private int jwtTokenExpireTime;
 
     private String secretkey = "";
 
@@ -33,18 +37,19 @@ public class JwtService {
         }
     }
 
-    public String generateToken(String username) {
+    public LoginResponse generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder()
+        long currentTimeMillis = System.currentTimeMillis();
+        String accessToken = Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 86400000)) // expires after one day
+                .issuedAt(new Date(currentTimeMillis))
+                .expiration(new Date(currentTimeMillis + jwtTokenExpireTime))
                 .and()
                 .signWith(getKey())
                 .compact();
-
+        return new LoginResponse(accessToken, jwtTokenExpireTime);
     }
 
     private SecretKey getKey() {

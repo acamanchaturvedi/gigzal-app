@@ -1,7 +1,7 @@
 package com.notabusiness.app.entity;
 
 import com.notabusiness.app.util.Auditable;
-import com.notabusiness.app.util.StatusType;
+import com.notabusiness.app.util.enums.StatusType;
 import jakarta.persistence.*;
 import lombok.Data;
 

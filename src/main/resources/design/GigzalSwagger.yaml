@@ -1,24 +1,98 @@
 openapi: 3.0.0
 info:
-  title: Swagger Petstore - OpenAPI 3.0
-
+  title: Gigzal - OpenAPI 3.0
   termsOfService: http://swagger.io/terms/
   contact:
-    email: apiteam@swagger.io
+    email: acamanchaturvedi@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.11
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: local server, dev environment
 tags:
+  - name: authentication
+    description: register new user, login user and get access token
   - name: service
     description: Everything about service
-    externalDocs:
-      description: Find out more
-      url: http://swagger.io
 paths:
+  /register:
+    post:
+      tags:
+        - authentication
+      summary: register in app to create a new account
+      operationId: register
+      parameters:
+        - name: transactionId
+          in: header
+          required: true
+          description: provide the unique guid for each new request
+          schema:
+            type: string
+            format: uuid
+          example: 68c62352-e799-49f7-8db0-2d52a5b49126
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterRequest'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /login:
+    post:
+      tags:
+        - authentication
+      summary: login to app, fetch access token on successful login
+      operationId: login
+      parameters:
+        - name: transactionId
+          in: header
+          required: true
+          description: provide the unique guid for each new request
+          schema:
+            type: string
+            format: uuid
+          example: 68c62352-e799-49f7-8db0-2d52a5b49126
+        - name: username
+          in: query
+          description: Provide the username of the user
+          required: true
+          schema:
+            type: string
+          example: aman
+        - name: password
+          in: query
+          description: Provide the password of the user
+          required: true
+          schema:
+            type: string
+            format: password
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   /categories:
     get:
       tags:
@@ -51,9 +125,69 @@ paths:
                   $ref: '#/components/schemas/CategorySearchResponse'
         '400':
           description: Invalid status value
-
 components:
   schemas:
+    ApiErrorResponse:
+      type: object
+      required:
+        - transactionId
+        - timestamp
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+          example: 68c62352-e799-49f7-8db0-2d52a5b49126
+        errorCode:
+          type: string
+          example: custom error code
+        customMessage:
+          type: string
+          example: username or password can not be empty
+        message:
+          type: string
+          example: acamanchaturvedi@gmail.com
+        path:
+          type: string
+          example: /register
+        timestamp:
+          type: string
+          format: date-time
+          example: 2024-11-02T13:03:52.833457
+    RegisterRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: aman1
+        password:
+          type: string
+          example: pass@123
+        name:
+          type: string
+          example: Aman Chaturvedi
+        email:
+          type: string
+          format: email
+          example: acamanchaturvedi@gmail.com
+        phone:
+          type: string
+          example: '+918384960199'
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWFuMSIsImlhdCI6MTcyOTk1MDY2MSwiZXhwIjoxNzMwMDM3MDYxfQ.SpXggj2ZNjmBOqxuB56QAHIkcwU9YQcpE7z11wvuwwE
+        expiresInMilliseconds:
+          type: integer
+          example: 86400000
+      required:
+        - accessToken
+        - expiresInMilliseconds
     CategorySearchResponse:
       type: object
       properties:
