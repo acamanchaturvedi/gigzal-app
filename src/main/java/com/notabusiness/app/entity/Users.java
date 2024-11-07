@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import com.notabusiness.app.util.enums.UserRole;
 
+import java.io.Serializable;
+
 @Data
 @Entity
-public class Users extends Auditable {
+public class Users extends Auditable implements Serializable {
 
     @Id
     @Column(name = "username")

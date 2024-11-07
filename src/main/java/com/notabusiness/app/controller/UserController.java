@@ -7,6 +7,7 @@ import com.notabusiness.app.gigzal.generated.model.LoginResponse;
 import com.notabusiness.app.gigzal.generated.model.RegisterRequest;
 import com.notabusiness.app.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class UserController implements AuthenticationApi {
 
     private final UserService userService;
@@ -24,9 +26,11 @@ public class UserController implements AuthenticationApi {
 
     @Override
     public RegisterRequest register(UUID transactionId, RegisterRequest registerRequest) {
+        log.info("call register() " + registerRequest);
         Users user = modelMapper.map(registerRequest, Users.class);
         if (user.getUsername() == null || user.getUsername().isBlank()
                 || user.getPassword() == null || user.getPassword().isBlank()) {
+            log.error(RESPONSE_BAD_REQUEST);
             throw new ApplicationException(RESPONSE_BAD_REQUEST, transactionId);
         }
         return modelMapper.map(userService.register(user), RegisterRequest.class);
@@ -35,6 +39,7 @@ public class UserController implements AuthenticationApi {
     @Override
     public LoginResponse login(UUID transactionId, String username, String password) {
         if (username == null || username.isBlank() || password == null || password.isBlank()) {
+            log.error(RESPONSE_BAD_REQUEST);
             throw new ApplicationException(RESPONSE_BAD_REQUEST, transactionId);
         }
         return userService.verify(username, password);
