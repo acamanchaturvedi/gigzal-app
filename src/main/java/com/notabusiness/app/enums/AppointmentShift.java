@@ -1,4 +1,4 @@
-package com.notabusiness.app.util.enums;
+package com.notabusiness.app.enums;
 
 public enum AppointmentShift {
     MORNING,

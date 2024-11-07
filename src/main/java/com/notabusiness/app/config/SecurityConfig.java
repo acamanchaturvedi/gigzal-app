@@ -1,6 +1,6 @@
 package com.notabusiness.app.config;
 
-import com.notabusiness.app.config.filter.JwtFilter;
+import com.notabusiness.app.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

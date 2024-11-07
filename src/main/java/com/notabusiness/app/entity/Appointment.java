@@ -1,7 +1,7 @@
 package com.notabusiness.app.entity;
 
-import com.notabusiness.app.util.enums.AppointmentShift;
-import com.notabusiness.app.util.enums.AppointmentType;
+import com.notabusiness.app.enums.AppointmentShift;
+import com.notabusiness.app.enums.AppointmentType;
 import com.notabusiness.app.util.Auditable;
 import jakarta.persistence.*;
 import lombok.Data;

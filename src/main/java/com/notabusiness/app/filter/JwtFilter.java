@@ -1,4 +1,4 @@
-package com.notabusiness.app.config.filter;
+package com.notabusiness.app.filter;
 
 import com.notabusiness.app.service.JwtService;
 import com.notabusiness.app.service.MyUserDetailsService;
