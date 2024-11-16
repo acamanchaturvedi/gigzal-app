@@ -1,1 +1,0 @@
-users ke andr role_id as foreign key
