@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController implements AuthenticationApi {
 
     private final UserService userService;
-
     private final ModelMapper modelMapper;
 
     private static final String RESPONSE_BAD_REQUEST = "username or password can not be empty";

@@ -133,9 +133,6 @@ components:
           example: 2024-11-02T13:03:52.833457
     RegisterRequest:
       type: object
-      required:
-        - username
-        - password
       properties:
         username:
           type: string
