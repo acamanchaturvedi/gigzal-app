@@ -23,15 +23,6 @@ paths:
         - authentication
       summary: register in app to create a new account
       operationId: register
-      parameters:
-        - name: transactionId
-          in: header
-          required: true
-          description: provide the unique guid for each new request
-          schema:
-            type: string
-            format: uuid
-          example: 68c62352-e799-49f7-8db0-2d52a5b49126
       requestBody:
         required: true
         content:
@@ -58,14 +49,6 @@ paths:
       summary: login to app, fetch access token on successful login
       operationId: login
       parameters:
-        - name: transactionId
-          in: header
-          required: true
-          description: provide the unique guid for each new request
-          schema:
-            type: string
-            format: uuid
-          example: 68c62352-e799-49f7-8db0-2d52a5b49126
         - name: username
           in: query
           description: Provide the username of the user
@@ -130,13 +113,8 @@ components:
     ApiErrorResponse:
       type: object
       required:
-        - transactionId
         - timestamp
       properties:
-        transactionId:
-          type: string
-          format: uuid
-          example: 68c62352-e799-49f7-8db0-2d52a5b49126
         errorCode:
           type: string
           example: custom error code
