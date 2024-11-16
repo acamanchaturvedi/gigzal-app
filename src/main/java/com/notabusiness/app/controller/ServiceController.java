@@ -4,12 +4,14 @@ import com.notabusiness.app.gigzal.generated.controller.ServiceApi;
 import com.notabusiness.app.gigzal.generated.model.CategorySearchResponse;
 import com.notabusiness.app.service.CategoryService;
 import com.notabusiness.app.util.CountCategorySearchResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 public class ServiceController implements ServiceApi {
 
     @Autowired
@@ -17,7 +19,7 @@ public class ServiceController implements ServiceApi {
 
     @Override
     public List<CategorySearchResponse> findAllCategories(String range, String category) {
-        System.out.println(category);
+        log.info(category);
         CountCategorySearchResponse categories = categoryService.getCategories(category, range);
         return categories.getResponse();
     }
